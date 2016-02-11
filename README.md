@@ -1,5 +1,9 @@
+[![Build Status](https://travis-ci.org/spacehelmetboy/hbg-duration-parser.svg?branch=master)](https://travis-ci.org/spacehelmetboy/hbg-duration-parser)
+
+
 HBG Duration Parser
 =========
+
 
 Methods for converting to and from strings and HBG duration objects.
 
