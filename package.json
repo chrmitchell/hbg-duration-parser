@@ -1,0 +1,30 @@
+{
+  "name": "duration-parser",
+  "version": "0.0.1",
+  "description": "methods for converting to/from strings and HBG duration objects",
+  "main": "durationParser.js",
+  "scripts": {
+    "test": "mocha --reporter spec",
+     "test:watch": "npm test -- --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spacehelmetboy/hbg-duration-parser.git"
+  },
+  "keywords": [
+    "hbg"
+  ],
+  "author": "Chris Mitchell <Chris.Mitchell@hbgusa.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/spacehelmetboy/hbg-duration-parser/issues"
+  },
+  "homepage": "https://github.com/spacehelmetboy/hbg-duration-parser#readme",
+  "devDependencies": {
+    "expect": "^1.14.0",
+    "mocha": "^2.4.5"
+  },
+  "dependencies": {
+    "lodash": "^4.3.0"
+  }
+}

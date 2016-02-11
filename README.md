@@ -1,1 +1,1 @@
-a thing.
+Methods for converting to/from strings and HBG duration objects
