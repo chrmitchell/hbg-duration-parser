@@ -5,7 +5,7 @@
   "main": "durationParser.js",
   "scripts": {
     "test": "mocha --reporter spec",
-     "test:watch": "npm test -- --watch"
+    "test:watch": "npm test -- --watch"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,6 @@
     "mocha": "^2.4.5"
   },
   "dependencies": {
-    "lodash": "^4.3.0"
+    "underscore": "^1.8.3"
   }
 }

@@ -1,4 +1,4 @@
-var _ = require('lodash');
+var _ = require('underscore');
 
 var unitCodes = {
 	'ms': 'milliseconds',
@@ -43,6 +43,12 @@ module.exports = {
 
 	durationToDisplayString: function(duration) {
 		var bits = []
+		var validUnits = ['hours', 'minutes', 'seconds'];
+
+		_.each(duration, function(value, unit) { 
+			if ( !_.contains(validUnits, unit)) throw new Error('invalid duration unit');
+		});
+
 		if (duration.hours) { bits.push(duration.hours + 'h'); }
 		if (duration.minutes) { bits.push(duration.minutes + 'm'); }
 		if (duration.seconds) { bits.push(duration.seconds + 's'); }
@@ -97,7 +103,6 @@ function findDurationTagInString(str) {
 	if (durationMatches.length > 1) throw Error('multiple durations in a single str.', str);
 
 	var match = durationMatches[0];
-	console.log(match);
 	return match.substr(1, match.length - 2);
 }
 
@@ -107,7 +112,6 @@ function parseDurationTag(durationStr) {
 
 	_.each(durationStr.split(':'), function(duration) {
 		var unit = duration.match(/[^0-9]+/ig);
-		console.log(unit);
 
 		if (!unit) throw new Error('missing duration unit for ' + duration + ' in ' + durationStr);
 		if (unit.length > 1 ) throw Error('invalid duration unit for ' + duration + '. missing : separator?');
