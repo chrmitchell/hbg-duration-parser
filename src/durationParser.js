@@ -12,24 +12,12 @@ let unitCodes = {
 };
 
 module.exports = {
-	tagToDuration: function(line) {
-		var tag = findDurationTagInString(line);
-		if (tag) return parseDurationTag(tag);
-	},
-
-	durationToTag: function(durationObj) {
-		var params = [];
-
-		_.each(durationObj, function(val, key) {
-			params.push(val + (_.invert(unitCodes))[key]);
-		});
-
-		return '<' + params.join(':') + '>';
-	},
-
+	
 	/* takes a string and returns a boolean of whether it can be parsed as
 	 * a number between 0 and 60 */
-	isValidDurationValue: function(str) {
+	isValidDurationValue: (str) => {
+
+		/* reject anything other than string or number */
 		if (typeof str !== "string" && typeof str !== "number") return false;
 
 		/* if there are any non-digits, reject it */
@@ -41,7 +29,24 @@ module.exports = {
 		return true;
 	},
 
-	durationToDisplayString: function(duration) {
+	getDurationFromTag: (line) => {
+		var tag = findDurationTagInString(line);
+		if (tag) return parseDurationTag(tag);
+	},
+
+	getTagFromDuration: (durationObj) => {
+		var params = [];
+
+		_.each(durationObj, function(val, key) {
+			params.push(val + (_.invert(unitCodes))[key]);
+		});
+
+		return '<' + params.join(':') + '>';
+	},
+
+	
+
+	durationToDisplayString: (duration) => {
 		var bits = []
 		var validUnits = ['hours', 'minutes', 'seconds'];
 
@@ -55,7 +60,7 @@ module.exports = {
 		return bits.join(':');
 	},
 
-	estimateDurationsFromString: function(str) {
+	estimateDurationsFromString: (str) => {
 		var that = this;
 
 		var words = str.split(' ');

@@ -1,16 +1,21 @@
 import expect from 'expect';
-var durationParser = require('../dist/durationParser');
+import durationParser from '../dist/durationParser';
+
+let method = durationParser.durationToDisplayString;
+const testEqual = (input, output) => { expect(method( input )).toEqual(output); };
+const testThrows = (input, errorRegExp) => { expect( () => { method(input); }).toThrow( errorRegExp ); };
 
 describe('durationToDisplayString', function() {
 	it('should return nicely formatted display strings from duration objects', function() {
-		expect(durationParser.durationToDisplayString({minutes: 3})).toEqual('3m');
-		expect(durationParser.durationToDisplayString({minutes: 3, seconds:10})).toEqual('3m:10s');
-		expect(durationParser.durationToDisplayString({hours: 3, seconds:10})).toEqual('3h:10s');
-		expect(durationParser.durationToDisplayString({hours: 3, minutes:20, seconds:10})).toEqual('3h:20m:10s');
-		expect(durationParser.durationToDisplayString({seconds: 30})).toEqual('30s');
+		testEqual( {minutes: 3}, '3m' );
+		testEqual( {minutes: 3, seconds:10}, '3m:10s' );
+		testEqual( {hours: 3, seconds:10}, '3h:10s' );
+		testEqual( {hours: 3, minutes:20, seconds:10}, '3h:20m:10s' );
+		testEqual( {seconds: 30}, '30s');
 	});
 	it('should not handle units other than minutes, hours, and seconds.', function() {
-		expect(function() { durationParser.durationToDisplayString({days: 10})}).toThrow(/invalid duration unit/);
-		expect(function() { durationParser.durationToDisplayString({minuts: 10})}).toThrow(/invalid duration unit/);
+		testThrows( {days: 10}, /invalid duration unit/ );
+		testThrows( {minuts: 10}, /invalid duration unit/ );
+		testThrows( {nonsenses: 10}, /invalid duration unit/ );
 	});
 });
