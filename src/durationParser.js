@@ -29,6 +29,7 @@ module.exports = {
 		return true;
 	},
 
+
 	getDurationFromTag: (line) => {
 		var tag = findDurationTagInString(line);
 		if (tag) return parseDurationTag(tag);
@@ -44,8 +45,6 @@ module.exports = {
 		return '<' + params.join(':') + '>';
 	},
 
-	
-
 	durationToDisplayString: (duration) => {
 		var bits = []
 		var validUnits = ['hours', 'minutes', 'seconds'];
@@ -60,42 +59,40 @@ module.exports = {
 		return bits.join(':');
 	},
 
-	estimateDurationsFromString: (str) => {
+	estimateDurationsFromString: function(str) {
 		var that = this;
 
 		var words = str.split(' ');
 		words = _.map(words, function(word) { return word.replace(/[\.\,\(\)]/g, ''); });
 
-		var durationWords = ['minutes', 'minute', 'seconds'];
-		var estimate;
+		var durationWords = {
+			"seconds": ['second', 'seconds'],
+			"minutes": ['minute', 'minutes'],
+			"hours": ['hour', 'hours'],
+			"days": ['day', 'days']
+		};
 
 		var estimates = [];
 
 		_.each(words, function(word, i) {
-			if (word.match(/[0-9]+/g)) {
-				if ( _.indexOf(durationWords, words[i+1]) > -1 ) {
-					estimates.push('<' + word + words[i+1].charAt(0) + '>');
-				} else if ( _.indexOf(durationWords, words[i+2]) > -1) {
-					estimates.push('<' + word + words[i+2].charAt(0) + '>');
-				} else if ( _.indexOf(durationWords, words[i+3]) > -1) {
-					estimates.push('<' + word + words[i+3].charAt(0) + '>');
-				}
-			}
+			if (word.match(/[0-9]+/g) || word==="a" || word==="an") {
+				var estimate = {};
 
-			/* "a minute" becomes <1m> */
-			else if (word === 'minute' && words[i-1]=== 'a') estimates.push('<1m>');
+				_.each(durationWords, function(durationWordSynonyms, durationWord) {
+					if ( _.indexOf(durationWordSynonyms, words[i+1]) > -1 ) {
+						estimate[durationWord] = parseInt(word,10) || 1;
+					} else if ( _.indexOf(durationWordSynonyms, words[i+2]) > -1) {
+						estimate[durationWord] = parseInt(word,10) || 1;
+					} else if ( _.indexOf(durationWordSynonyms, words[i+3]) > -1) {
+						estimate[durationWord] = parseInt(word,10) || 1;
+					}
+				});
+
+				if (Object.keys(estimate).length) estimates.push(estimate);
+			}
 		});
 
-		estimates = _.map(estimates, function(estimate) { return that.tagToDuration(estimate); });
-
-		console.log(estimates);
-
 		return estimates;
-		// var estimate = estimates[0];
-		// return estimate;
-		// return {
-		// 	estimate: this.tagToDuration(estimate)
-		// };
 	}
 };
 
