@@ -1,6 +1,6 @@
-var _ = require('underscore');
+import _ from 'underscore';
 
-var unitCodes = {
+let unitCodes = {
 	'ms': 'milliseconds',
 	'm': 'minutes',
 	's': 'seconds',
