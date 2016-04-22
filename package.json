@@ -4,12 +4,12 @@
   "description": "Methods for working with HBG duration objects.",
   "main": "durationParser.js",
   "scripts": {
-    "test": "mocha --reporter spec",
+    "test": "mocha --compilers js:babel-core/register --recursive",
     "test:watch": "npm test -- --watch"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/spacehelmetboy/hbg-duration-parser.git"
+    "url": "git+https://github.com/chrmitchell/hbg-duration-parser.git"
   },
   "keywords": [
     "hbg",
@@ -18,10 +18,13 @@
   "author": "Chris Mitchell <Chris.Mitchell@hbgusa.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/spacehelmetboy/hbg-duration-parser/issues"
+    "url": "https://github.com/chrmitchell/hbg-duration-parser/issues"
   },
-  "homepage": "https://github.com/spacehelmetboy/hbg-duration-parser#readme",
+  "homepage": "https://github.com/chrmitchell/hbg-duration-parser#readme",
   "devDependencies": {
+    "babel-core": "^6.7.7",
+    "babel-preset-es2015": "^6.6.0",
+    "babel-preset-stage-0": "^6.5.0",
     "expect": "^1.14.0",
     "mocha": "^2.4.5"
   },
