@@ -1,5 +1,5 @@
 import expect from 'expect';
-var durationParser = require('../durationParser');
+var durationParser = require('../dist/durationParser');
 
 describe('tagToDuration', function() {
 	it('should return duration object when valid tag present', function() {

@@ -1,5 +1,5 @@
 import expect from 'expect';
-var durationParser = require('../durationParser');
+var durationParser = require('../dist/durationParser');
 
 describe('durationToDisplayString', function() {
 	it('should return nicely formatted display strings from duration objects', function() {

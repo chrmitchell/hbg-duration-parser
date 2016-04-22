@@ -1,5 +1,5 @@
 import expect from 'expect';
-var durationParser = require('../durationParser');
+var durationParser = require('../dist/durationParser');
 
 describe('isValidDurationValue', function() {
 	it('should return true when passed valid duration value', function() {
