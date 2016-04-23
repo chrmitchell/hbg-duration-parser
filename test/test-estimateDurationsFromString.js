@@ -18,8 +18,6 @@ describe('estimateDurationsFromString', function() {
 			testEqual("for 10 days, or", [{days: 10}]);
 		});
 
-		/* should process 90 minutes as 1 hour and 30 minutes? */
-
 		it('for now, should return multiple estimates on compound durations', function() {
 			testEqual("for 1 minute and 45 seconds", [{minutes: 1}, {seconds: 45}]);
 		});
@@ -37,10 +35,6 @@ describe('estimateDurationsFromString', function() {
 			testEqual('add 13 cups of something', []);
 		});
 
-		/* should only handle one duration per string, ignore or throw when passed multiples? */
-
-		// it('should return the lower value of a range, when passed a string containing a range of time.', function() {
-
 		it('should handle "a minute" as 1 minute, etc', function() {
 			testEqual('a minute', [{minutes: 1}]);
 			testEqual('a second', [{seconds: 1}]);
@@ -48,8 +42,14 @@ describe('estimateDurationsFromString', function() {
 			testEqual('a hour', [{hours: 1}]);
 		});
 
+		/* PENDING TESTS: */
+		it('should process 90 minutes as 1 hour and 30 minutes?');
+		it('should only handle one duration per string, ignore or throw when passed multiples?');
+		it('should return the lower value of a range, when passed a string containing a range of time.');
 
-		/* 'for 30 seconds or a minute' */
+		it('should handle "or" as a range instead of multiple durations?');
+		// testEqual('for 30 seconds or a minute', [{seconds: 30}]);
+
 		/* destinguish between multiple units and a range:
 			"put it in the oven for 1 hour and 20 minutes"
 			[{hours: 1, minutes: 20}]
@@ -58,5 +58,6 @@ describe('estimateDurationsFromString', function() {
 			[{hours: 2}] (because range)
 			(if contains "or" or "to" it's a range, otherwise it's a single estimate?)
 		*/
+		it('should distinguish between multiple units and a range');
 });
 

@@ -11,7 +11,6 @@ let unitCodes = {
 	'y': 'years'
 };
 
-
 /* takes a string and returns a boolean of whether it can be parsed as
  * a number between 0 and 60 */
  
@@ -94,7 +93,7 @@ const estimateDurationsFromString = ( str ) => {
 	return estimates;
 };
 
-module.exports = {
+export default {
 	isValidDurationValue,
 	getDurationFromTag,
 	getTagFromDuration,

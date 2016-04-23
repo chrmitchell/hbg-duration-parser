@@ -18,4 +18,7 @@ describe('durationToDisplayString', function() {
 		testThrows( {minuts: 10}, /invalid duration unit/ );
 		testThrows( {nonsenses: 10}, /invalid duration unit/ );
 	});
+
+	/* write a isValidDurationObject method and call it from various methods to check this? */
+	it('should throw error when not passed a valid duration object');
 });
