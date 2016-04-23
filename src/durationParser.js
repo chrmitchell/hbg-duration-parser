@@ -13,9 +13,7 @@ let unitCodes = {
 
 /* takes a string and returns a boolean of whether it can be parsed as
  * a number between 0 and 60 */
- 
 const isValidDurationValue = (str) => {
-
 	/* reject anything other than string or number */
 	if (typeof str !== "string" && typeof str !== "number") return false;
 
@@ -43,7 +41,7 @@ const getTagFromDuration = (durationObj) => {
 	return '<' + params.join(':') + '>';
 };
 
-const durationToDisplayString = (duration) => {
+const getDisplayString = (duration) => {
 	var bits = []
 	var validUnits = ['hours', 'minutes', 'seconds'];
 
@@ -97,7 +95,7 @@ export default {
 	isValidDurationValue,
 	getDurationFromTag,
 	getTagFromDuration,
-	durationToDisplayString,
+	getDisplayString,
 	estimateDurationsFromString
 };
 

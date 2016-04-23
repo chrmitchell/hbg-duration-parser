@@ -1,7 +1,7 @@
 import expect from 'expect';
 import durationParser from '../dist/durationParser';
 
-let method = durationParser.durationToDisplayString;
+let method = durationParser.getDisplayString;
 const testEqual = (input, output) => { expect(method( input )).toEqual(output); };
 const testThrows = (input, errorRegExp) => { expect( () => { method(input); }).toThrow( errorRegExp ); };
 
