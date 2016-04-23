@@ -18,3 +18,28 @@ gulp.task('watch', function () {
 });
 
 gulp.task('default', ['babel','watch']);
+
+
+// gulp.task('browserify', function () {
+    
+//     var entryFile = 'src/durationParser.js';
+
+//     var bundler = watchify(browserify({
+//         entries: entryFile,
+//         debug: true,
+//         transform: [babelify]
+//     }));
+
+//     var rebundle = function () {
+//     	console.log('rebundling');
+//         return bundler.bundle().
+//             on('error', function (err) { console.error(err); })
+//             .pipe(source('./durationParser.js'))
+//             // .pipe(uglify())
+//             .pipe(gulp.dest('dist'));
+//     };
+//     bundler.on('update', rebundle);
+//     return rebundle();
+// });
+
+// gulp.task('default', ['browserify']);
