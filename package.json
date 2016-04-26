@@ -1,6 +1,6 @@
 {
   "name": "@chris_mitchell_hbg/duration-parser",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Methods for working with HBG duration objects.",
   "main": "dist/durationParser.js",
   "scripts": {
