@@ -45,7 +45,7 @@ const getDisplayString = (duration) => {
 	var bits = []
 	var validUnits = ['hours', 'minutes', 'seconds'];
 
-	_.each(duration, function(value, unit) { 
+	_.each(duration, function(value, unit) {
 		if ( !_.contains(validUnits, unit)) throw new Error('invalid duration unit');
 	});
 
