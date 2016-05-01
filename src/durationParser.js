@@ -26,6 +26,39 @@ const isValidDurationValue = (str) => {
 	return true;
 };
 
+const secondsToDuration = (s) => {
+	let duration = {};
+
+	let seconds, minutes, hours, days;
+
+	seconds = s % 60;
+
+	s /= 60;
+	minutes = Math.floor(s) % 60;
+
+	s /= 60;
+	hours = Math.floor(s) % 24;
+
+	s /= 24;
+	days = Math.floor(s);
+
+	if (seconds) duration.seconds = seconds;
+	if (minutes) duration.minutes = minutes;
+	if (hours) duration.hours = hours;
+	if (days) duration.days = days;
+
+	return duration;
+};
+
+const durationToSeconds = (duration) => {
+	let seconds = 0;
+	if (duration.hours) seconds += (60 * 60 * duration.hours);
+	if (duration.minutes) seconds += (60 * duration.minutes);
+	if (duration.seconds) seconds += duration.seconds;
+
+	return seconds;
+};
+
 const getDurationFromTag = (line) => {
 	var tag = findDurationTagInString(line);
 	if (tag) return parseDurationTag(tag);
@@ -96,7 +129,9 @@ export default {
 	getDurationFromTag,
 	getTagFromDuration,
 	getDisplayString,
-	estimateDurationsFromString
+	estimateDurationsFromString,
+	durationToSeconds,
+	secondsToDuration
 };
 
 function findDurationTagInString(str) {
