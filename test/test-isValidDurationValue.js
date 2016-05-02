@@ -13,6 +13,13 @@ describe('isValidDurationValue', function() {
 		testEqual( 0, true );
 		testEqual( 1, true );
 		testEqual( 12, true );
+		testEqual( '60', true );
+		testEqual( '12', true );
+		testEqual( '0', true );
+		testEqual( '1', true );
+		testEqual( '001', true );
+		testEqual( '0000001', true );
+		testEqual( '00000010', true );
 	});
 
 	it('should return true when passed value above 60', function() {
@@ -22,16 +29,7 @@ describe('isValidDurationValue', function() {
 		testEqual( 61, true );
 	});
 
-	it('should return false when passed a string, even if it can be parsed as a number');
-	// , function() {
-	// 	testEqual( '60', false );
-	// 	testEqual( '12', false );
-	// 	testEqual( '0', false );
-	// 	testEqual( '1', false );
-	// 	testEqual( '001', false );
-	// 	testEqual( '0000001', false );
-	// 	testEqual( '00000010', false );
-	// });
+	// it('should return false when passed a string, even if it can be parsed as a number');
 
 	it('should return false when passed negative integers', function() {
 		testEqual( -20, false);

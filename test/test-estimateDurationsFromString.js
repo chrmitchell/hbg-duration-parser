@@ -42,11 +42,14 @@ describe('estimateDurationsFromString', function() {
 		testEqual('a hour', [{hours: 1}]);
 	});
 
+	it('should process 90 minutes as 1 hour and 30 minutes', function() {
+		testEqual('around 90 minutes', [{hours: 1, minutes: 30}]);
+	});
+
 	/* PENDING TESTS: */
-	it('should process 90 minutes as 1 hour and 30 minutes?');
+	it('should support days');
 	it('should only handle one duration per string, ignore or throw when passed multiples?');
 	it('should return the lower value of a range, when passed a string containing a range of time.');
-
 	it('should handle "or" as a range instead of multiple durations?');
 	// testEqual('for 30 seconds or a minute', [{seconds: 30}]);
 

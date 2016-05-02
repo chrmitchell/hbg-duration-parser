@@ -36,6 +36,7 @@ describe('isValidDurationObject', function() {
 	it('should return false on anything else', function() {
 		testEqual( [{minutes:3}, {minutes: 1}], false);
 		testEqual( undefined, false);
+		testEqual( null, false);
 		testEqual( '123', false);
 		testEqual( [123], false);
 	});

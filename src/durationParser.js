@@ -33,13 +33,14 @@ const normalizeDuration = (duration) => {
 		duration[key] = parseInt(duration[key], 10);
 	});
 
-	return duration;
+	let seconds = durationToSeconds(duration);
+	return secondsToDuration(seconds);
 };
 
 const isValidDurationObject = (duration) => {
-	if (typeof duration !== 'object') return false;
+	if (typeof duration !== 'object' || duration === null) return false;
 	return Object.keys(duration).every( (unit) => {
-		if (!(unit === 'minutes' || unit === 'hours' || unit === 'seconds')) return false;
+		if (!(unit === 'minutes' || unit === 'hours' || unit === 'seconds' || unit ==='days')) return false;
 		if (!isValidDurationValue(duration[unit])) return false;
 		return true;
 	});
@@ -74,11 +75,12 @@ const secondsToDuration = (s) => {
 };
 
 const durationToSeconds = (duration) => {
+	if ( !isValidDurationObject(duration) ) throw new Error('durationToSeconds must be passed a valid duration object');
 	let seconds = 0;
+	if (duration.days) seconds += (60 * 60 * 24 * duration.days);
 	if (duration.hours) seconds += (60 * 60 * duration.hours);
 	if (duration.minutes) seconds += (60 * duration.minutes);
 	if (duration.seconds) seconds += duration.seconds;
-
 	return seconds;
 };
 
@@ -105,12 +107,13 @@ const getDisplayString = (durationOrSeconds) => {
 	else duration = durationOrSeconds;
 
 	var bits = []
-	var validUnits = ['hours', 'minutes', 'seconds'];
+	var validUnits = ['days', 'hours', 'minutes', 'seconds'];
 
 	_.each(duration, function(value, unit) {
 		if ( !_.contains(validUnits, unit)) throw new Error('invalid duration unit');
 	});
 
+	if (duration.days) { bits.push(duration.days + 'd'); }
 	if (duration.hours) { bits.push(duration.hours + 'h'); }
 	if (duration.minutes) { bits.push(duration.minutes + 'm'); }
 	if (duration.seconds) { bits.push(duration.seconds + 's'); }
@@ -146,7 +149,7 @@ const estimateDurationsFromString = ( str ) => {
 				}
 			});
 
-			if (Object.keys(estimate).length) estimates.push(estimate);
+			if (Object.keys(estimate).length) estimates.push( normalizeDuration(estimate) );
 		}
 	});
 

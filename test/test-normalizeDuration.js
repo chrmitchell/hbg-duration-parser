@@ -17,6 +17,10 @@ describe('normalizeDuration', function() {
 	it('should turn 90s into 1m30s, etc', function() {
 		testEqual( {seconds: 90}, {minutes: 1, seconds: 30});
 		testEqual( {seconds: "90"}, {minutes: 1, seconds: 30});
+		testEqual( {minutes: 90}, {hours: 1, minutes: 30});
+		testEqual( {minutes: "90"}, {hours: 1, minutes: 30});
+		testEqual( {hours: 99}, {days: 4, hours: 3});
+		testEqual( {days: 399}, {days: 399});
 	});
 
 	it('should throw error when passed invalid duration obj', function() {
