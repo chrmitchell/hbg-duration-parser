@@ -16,9 +16,12 @@ describe('durationToSeconds', function() {
 		testEqual( { days: 3, hours: 21, minutes: 39}, 337140 );
 	});
 
+	it('should return 0 when passed an empty object', function() {
+		testEqual( {}, 0);
+	});
+
 	it('should throw when not passed a valid duration object', function() {
 		testThrows( undefined, /durationToSeconds must be passed a valid duration object/);
-		// testThrows( {}, /durationToSeconds must be passed a valid duration object/);
 		testThrows( null, /durationToSeconds must be passed a valid duration object/);
 		testThrows( '123', /durationToSeconds must be passed a valid duration object/);
 		testThrows( [123], /durationToSeconds must be passed a valid duration object/);
