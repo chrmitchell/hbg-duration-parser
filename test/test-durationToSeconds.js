@@ -7,10 +7,19 @@ const testThrows = (input, errorRegExp) => { expect( () => { method(input); }).t
 
 
 describe('durationToSeconds', function() {
-	it('should return proper amount of seconds', function() {
+	it('should accept a duration object and return proper amount of seconds', function() {
 		testEqual( { minutes: 3 }, 180 );
 		testEqual( { seconds: 33 }, 33 );
 		testEqual( { minutes: 7, seconds: 10 }, 430 );
 		testEqual( { hours: 2, minutes: 10 }, 7800 );
 	});
+
+	it('should throw when not passed a valid duration object');
+	// , function() {
+	// 	testThrows( undefined, /durationToSeconds must be passed a valid duration object/);
+	// 	testThrows( {}, /durationToSeconds must be passed a valid duration object/);
+	// 	testThrows( null, /durationToSeconds must be passed a valid duration object/);
+	// 	testThrows( '123', /durationToSeconds must be passed a valid duration object/);
+	// 	testThrows( [123], /durationToSeconds must be passed a valid duration object/);
+	// });
 });
