@@ -12,7 +12,7 @@ let unitCodes = {
 };
 
 /* takes a string and returns a boolean of whether it can be parsed as
- * a number between 0 and 60 */
+ * a positive number. currently allows numbers over 60 */
 const isValidDurationValue = (str) => {
 	/* reject anything other than string or number */
 	if (typeof str !== "string" && typeof str !== "number") return false;
@@ -22,11 +22,35 @@ const isValidDurationValue = (str) => {
 
 	var val = parseInt(str, 10);
 	if ( isNaN(val) ) return false;
-	if ( val < 0 || val > 60) return false;
+	if ( val < 0) return false;
 	return true;
 };
 
+const normalizeDuration = (duration) => {
+	if ( !isValidDurationObject(duration) ) throw new Error('normalizeDuration must be passed a valid duration object');
+
+	Object.keys(duration).forEach( (key) => {
+		duration[key] = parseInt(duration[key], 10);
+	});
+
+	let seconds = durationToSeconds(duration);
+	return secondsToDuration(seconds);
+};
+
+const isValidDurationObject = (duration) => {
+	if (typeof duration !== 'object' || duration === null) return false;
+	return Object.keys(duration).every( (unit) => {
+		if (!(unit === 'minutes' || unit === 'hours' || unit === 'seconds' || unit ==='days')) return false;
+		if (!isValidDurationValue(duration[unit])) return false;
+		return true;
+	});
+};
+
 const secondsToDuration = (s) => {
+	// if ( s === undefined) throw new Error('secondsToDuration must be passed an integer');
+	if (typeof s !== 'number') throw new Error('secondsToDuration must be passed an integer');
+	if (s<0) throw new Error('secondsToDuration only accepts positive integers');
+
 	let duration = {};
 
 	let seconds, minutes, hours, days;
@@ -51,11 +75,12 @@ const secondsToDuration = (s) => {
 };
 
 const durationToSeconds = (duration) => {
+	if ( !isValidDurationObject(duration) ) throw new Error('durationToSeconds must be passed a valid duration object');
 	let seconds = 0;
+	if (duration.days) seconds += (60 * 60 * 24 * duration.days);
 	if (duration.hours) seconds += (60 * 60 * duration.hours);
 	if (duration.minutes) seconds += (60 * duration.minutes);
 	if (duration.seconds) seconds += duration.seconds;
-
 	return seconds;
 };
 
@@ -74,14 +99,21 @@ const getTagFromDuration = (durationObj) => {
 	return '<' + params.join(':') + '>';
 };
 
-const getDisplayString = (duration) => {
+
+
+const getDisplayString = (durationOrSeconds) => {
+	let duration;
+	if (typeof durationOrSeconds === 'number') duration = secondsToDuration(durationOrSeconds);
+	else duration = durationOrSeconds;
+
 	var bits = []
-	var validUnits = ['hours', 'minutes', 'seconds'];
+	var validUnits = ['days', 'hours', 'minutes', 'seconds'];
 
 	_.each(duration, function(value, unit) {
 		if ( !_.contains(validUnits, unit)) throw new Error('invalid duration unit');
 	});
 
+	if (duration.days) { bits.push(duration.days + 'd'); }
 	if (duration.hours) { bits.push(duration.hours + 'h'); }
 	if (duration.minutes) { bits.push(duration.minutes + 'm'); }
 	if (duration.seconds) { bits.push(duration.seconds + 's'); }
@@ -117,7 +149,7 @@ const estimateDurationsFromString = ( str ) => {
 				}
 			});
 
-			if (Object.keys(estimate).length) estimates.push(estimate);
+			if (Object.keys(estimate).length) estimates.push( normalizeDuration(estimate) );
 		}
 	});
 
@@ -126,12 +158,14 @@ const estimateDurationsFromString = ( str ) => {
 
 export default {
 	isValidDurationValue,
+	isValidDurationObject,
 	getDurationFromTag,
 	getTagFromDuration,
 	getDisplayString,
 	estimateDurationsFromString,
 	durationToSeconds,
-	secondsToDuration
+	secondsToDuration,
+	normalizeDuration
 };
 
 function findDurationTagInString(str) {

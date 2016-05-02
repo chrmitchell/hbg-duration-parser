@@ -7,12 +7,12 @@ const testThrows = (input, errorRegExp) => { expect( () => { method(input); }).t
 
 
 describe('getDisplayHTML', function() {
-	it('should return a nicely formatted string of HTML');
+	// it('should return a nicely formatted string of HTML');
 
-	it('should use "class" by default, but "className" when passed config.formatForJSX=true');
+	// it('should use "class" by default, but "className" when passed config.formatForJSX=true');
 
-	it('should allow costomization of class names via a config property');
+	// it('should allow costomization of class names via a config property');
 
-	it('should ignore missing properties');
+	// it('should ignore missing properties');
 
 });

@@ -27,4 +27,6 @@ describe('getDurationFromTag', function() {
 	it('should throw when passed tag with unrecognized duration unit', function() {
 		testThrows('<10z>some step.', /unrecognized duration unit/ );
 	});
+
+	it('should handle days');
 });

@@ -7,7 +7,7 @@ const testThrows = (input, errorRegExp) => { expect( () => { method(input); }).t
 
 
 describe('secondsToDuration', function() {
-	it('should return proper duration object', function() {
+	it('should accept an integer and return a duration object', function() {
 		testEqual( 33, { seconds: 33 } );
 		testEqual( 63, { minutes: 1, seconds: 3 } );
 		testEqual( 60, { minutes: 1 } );
@@ -17,5 +17,19 @@ describe('secondsToDuration', function() {
 		testEqual( 259200, { days: 3 });
 	});
 
-	it('should return an empyy object when passed 0');
+	it('should throw if passed negative integers as input', function() {
+		testThrows( -33, /secondsToDuration only accepts positive integers/);
+	});
+
+	it('should throw when not passed an integer', function() {
+		testThrows( undefined, /secondsToDuration must be passed an integer/);
+		testThrows( {}, /secondsToDuration must be passed an integer/);
+		testThrows( null, /secondsToDuration must be passed an integer/);
+		testThrows( '123', /secondsToDuration must be passed an integer/);
+		testThrows( [123], /secondsToDuration must be passed an integer/);
+	});
+
+	it('should return an empty object when passed 0', function() {
+		testEqual( 0, {});
+	});
 });
