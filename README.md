@@ -7,11 +7,15 @@ HBG Duration Parser
 
 A Collection of methods for converting between strings and duration objects.
 
-## Example
+## Examples
 
 ```
 durationParser.estimateDurationsFromString('Blend the mixture for 90 seconds.'); 
 // returns { minutes: 1, seconds: 30 }
+
+durationParser.getDisplayString({ days: 2, hours: 3, minutes: 23, seconds: 15});
+// returns '2d:3h:23m:15s'
+
 ```
 
 ## Installation
