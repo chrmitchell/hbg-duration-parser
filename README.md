@@ -5,7 +5,12 @@ HBG Duration Parser
 =========
 
 
-Methods for converting to and from strings and HBG duration objects.
+A Collection of methods for converting between strings and duration objects.
+
+## Example
+
+```
+durationParser.estimateDurationsFromString('Blend the mixture for 90 seconds.'); // returns { minutes: 1, seconds: 30 }
 
 
 ## Installation
