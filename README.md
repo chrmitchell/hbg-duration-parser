@@ -10,7 +10,8 @@ A Collection of methods for converting between strings and duration objects.
 ## Example
 
 ```
-durationParser.estimateDurationsFromString('Blend the mixture for 90 seconds.'); // returns { minutes: 1, seconds: 30 }
+durationParser.estimateDurationsFromString('Blend the mixture for 90 seconds.'); 
+// returns { minutes: 1, seconds: 30 }
 ```
 
 ## Installation
