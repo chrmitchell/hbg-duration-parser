@@ -106,7 +106,7 @@ const getDisplayString = (durationOrSeconds) => {
 	if (typeof durationOrSeconds === 'number') duration = secondsToDuration(durationOrSeconds);
 	else duration = durationOrSeconds;
 
-	var bits = []
+	var bits = [];
 	var validUnits = ['days', 'hours', 'minutes', 'seconds'];
 
 	_.each(duration, function(value, unit) {
@@ -181,7 +181,6 @@ function findDurationTagInString(str) {
 }
 
 function parseDurationTag(durationStr) {
-
 	var durationObj = {};
 
 	_.each(durationStr.split(':'), function(duration) {
